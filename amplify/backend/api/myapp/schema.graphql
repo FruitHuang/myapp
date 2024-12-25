@@ -1,0 +1,6 @@
+type LatinDailyModel @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  sentence: String
+  higPitch: String
+  lowPitch: String
+}
