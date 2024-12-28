@@ -82,7 +82,7 @@ function checkVowel(myChar){
 
 const IndexContext = createContext(null);
 
-let item = daysIntoYear()%6;
+let item = daysIntoYear()%15;
 
 const notes = await fetchNotes();
 
@@ -127,8 +127,8 @@ function firstVowel()
 function rightVowel(index)
 {
 	let retValue = index;
-	if(index === sentence1.length -1)
-		return retValue;
+	if(index === (sentence1.length -1))
+		index =-1;
 	for(let i= index+1; i<sentence1.length; i++)
 	{	
 		const char = sentence1[i];
@@ -137,6 +137,8 @@ function rightVowel(index)
 			retValue =i;
 			break;		
 		}
+		if(i=== (sentence1.length-1))
+		 	i=-1;
 	}
 	return retValue;
 }
@@ -145,7 +147,7 @@ function leftVowel(index)
 {
 	let retValue = index;
 	if(index === 0)
-		return retValue;
+		index = sentence1.length;
 	for(let i= index-1; i>=0; i--)
 	{	
 		const char = sentence1[i];
@@ -154,6 +156,9 @@ function leftVowel(index)
 			retValue =i;
 			break;		
 		}
+		if(i=== 0)
+		   i=sentence1.length;
+
 	}
 	return retValue;
 }
@@ -528,7 +533,7 @@ else
    temp ="";
 }
 
-   if(longVIndex.includes(index1))
+  if(longVIndex.includes(index1))
 {
 	ret= temp + "overline";
 }
@@ -540,7 +545,7 @@ else
 {
 	if (index === index1) 
 	{
-   		//ret = "underline";	
+   		ret = "underline";	
 	}
 	else
 	{
@@ -602,7 +607,7 @@ else if(elideVIndex.includes(index1))
         </span>
       ))} </pre>
       {text.split("").map((char, index1) => (
-        <span key={index1} style={{visibility: isBlinking(index1) ? 'visible' : 'hidden', color: getColor(index1), }}>
+        <span key={index1} style={{visibility: isBlinking(index1) ? 'visible' : 'hidden', color: getColor(index1),textDecoration: index1 === index? 'underline' : 'None' }}>
 
           {char}
         </span>
@@ -619,7 +624,7 @@ function LeftButton() {
   );
   return (
 	
-	   <Button style={{width:'120px', backgroundColor: '#00FF00', marginRight: '10px'}} onClick={decrement}> &lt;== Left 
+	   <Button style={{backgroundColor: '#00FF00', marginRight: '10px'}} onClick={decrement}> &lt;== Left 
             </Button>
 
 
@@ -634,7 +639,7 @@ const { index,longVIndex, increment,decrement,markLong } = useContext(
   );
 
   return (
-   <Button style={{width:'120px',backgroundColor: '#00FF00', marginRight: '10px'}} onClick={increment}>
+   <Button style={{backgroundColor: '#00FF00', marginRight: '10px'}} onClick={increment}>
               Right ==>
             </Button>
   );
@@ -657,7 +662,7 @@ function LongButton() {
   };
   return (
 
-	   <Button style={{width:'120px',backgroundColor: '#00FF00', marginRight: '10px'}} onClick={handleClick}>Long (-)
+	   <Button style={{backgroundColor: '#00FF00', marginRight: '10px'}} onClick={handleClick}>Long (-)
             </Button>
 	  
 
@@ -676,7 +681,7 @@ function LongButton1() {
   };
   return (
 
-	   <Button style={{width:'120px',backgroundColor: '#00FF00', marginRight: '10px'}} onClick={handleClick}>Long (-)
+	   <Button style={{backgroundColor: '#00FF00', marginRight: '10px'}} onClick={handleClick}>Long (-)
             </Button>  
   );
 
@@ -694,7 +699,7 @@ const handleClick = () => {
   };
 
   return (
-   <Button style={{width:'120px',backgroundColor: '#00FF00', marginRight: '10px'}} onClick={(handleClick)}>
+   <Button style={{backgroundColor: '#00FF00', marginRight: '10px'}} onClick={(handleClick)}>
               Short (u)
             </Button>
   );
@@ -711,7 +716,7 @@ const handleClick = () => {
   };
 
   return (
-   <Button style={{width:'120px',backgroundColor: '#00FF00', marginRight: '100px'}} onClick={(handleClick)}>
+   <Button style={{backgroundColor: '#00FF00', marginRight: '100px'}} onClick={(handleClick)}>
               Elide (x)
             </Button>
   );
@@ -739,7 +744,7 @@ function CheckButton() {
 
   return (
 
-	   <Button style={{width:'150px',backgroundColor: 'orange', marginRight: '10px'}} onClick={handleClick}>Check Result
+	   <Button style={{padding: '10px 20px',backgroundColor: 'orange', marginRight: '60px'}} onClick={handleClick}>Check Result
             </Button>  
   );
 
@@ -757,7 +762,7 @@ const handleClick = () => {
   };
 
   return (
-   <Button style={{width:'150px',backgroundColor: 'orange', marginRight: '10px'}} onClick={(handleClick)}>
+   <Button style={{padding: '10px 30px', backgroundColor: 'orange', marginRight: '60px'}} onClick={(handleClick)}>
               Start Over
             </Button>
   );
