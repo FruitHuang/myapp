@@ -677,6 +677,7 @@ function LongButton1() {
 
  const handleClick = () => {
 	markLong(index);
+	increment();
  	
   };
   return (
@@ -695,6 +696,7 @@ const { index,longVIndex,shortVIndex, increment,decrement,markLong,markShort } =
 
 const handleClick = () => {
 	markShort(index);
+	increment();
  	
   };
 
@@ -706,13 +708,13 @@ const handleClick = () => {
 }
 
 function ElideButton() {
-const { index,markElide} = useContext(
+const { index,increment,markElide} = useContext(
     IndexContext
   );
 
 const handleClick = () => {
 	markElide(index);
- 	
+ 	increment();
   };
 
   return (
